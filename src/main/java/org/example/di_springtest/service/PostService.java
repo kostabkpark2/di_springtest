@@ -1,8 +1,11 @@
 package org.example.di_springtest.service;
 
+import org.example.di_springtest.model.Post;
 import org.example.di_springtest.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostService {
@@ -13,7 +16,11 @@ public class PostService {
     this.postRepository = postRepository;
   }
 
-  public String getAllPost() {
+  public List<Post> getAllPost() {
     return postRepository.findAll();
+  }
+
+  public int createPost(Post post) {
+    return postRepository.insertPost(post);
   }
 }
