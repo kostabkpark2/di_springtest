@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
-public class PostService {
+@Service
+public class PostDtoService {
   private final PostRepository postRepository;
 
-  //@Autowired
-  public PostService(PostRepository postRepository){
+  @Autowired
+  public PostDtoService(PostRepository postRepository){
     this.postRepository = postRepository;
   }
 
