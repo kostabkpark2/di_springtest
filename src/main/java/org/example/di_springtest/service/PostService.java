@@ -23,4 +23,18 @@ public class PostService {
   public int createPost(Post post) {
     return postRepository.insertPost(post);
   }
+
+  public Post selectPost(int postId) {
+    return postRepository.findById(postId);
+  }
+
+  public void updatePost(Post post) {
+    Post findPost = postRepository.findById(post.getPostId());
+    findPost.setBody(post.getBody());
+    postRepository.updatePost(findPost);
+  }
+
+  public void deletePost(int postId) {
+    postRepository.deletePost(postId);
+  }
 }
