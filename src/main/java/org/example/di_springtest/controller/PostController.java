@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/ditest")
+//@Controller
+//@RequestMapping("/ditest")
 public class PostController {
   //@Autowired
   private final PostService postService;
 
-  @Autowired
+  //@Autowired
   public PostController(PostService postService) {
     this.postService = postService;
   }

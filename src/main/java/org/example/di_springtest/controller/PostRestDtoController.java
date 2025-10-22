@@ -20,18 +20,12 @@ public class PostRestDtoController {
 
   @GetMapping("/posts")
   public List<PostAllResponseDto> viewAllPosts() {
-
-    return null;
-    //postService.getAllPost();
+    return postService.getAllPost();
   }
 
   @PostMapping("/posts")
   public PostDetailResponseDto createNewPost(@RequestBody PostCreateRequestDto postDto) {
-    Post post = new Post();
-    post.setTitle(postDto.getTitle());
-    post.setBody(postDto.getBody());
-    String msg = postService.createPost(post) + "번째 게시판 글이 등록되었습니다.";
-    return null;
+    return postService.createPost(postDto);
   }
 
   @PatchMapping("/posts/{postId}")

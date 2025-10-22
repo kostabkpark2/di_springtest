@@ -1,6 +1,7 @@
 package org.example.di_springtest.dto;
 
 import lombok.*;
+import org.example.di_springtest.model.Post;
 
 @Getter
 @Setter
@@ -12,4 +13,13 @@ public class PostDetailResponseDto {
   private String title;
   private String body;
   private int likes;
+
+  public static PostDetailResponseDto of(Post post) {
+    return new PostDetailResponseDto(
+        post.getPostId(),
+        post.getTitle(),
+        post.getBody(),
+        post.getLikes()
+    );
+  }
 }
