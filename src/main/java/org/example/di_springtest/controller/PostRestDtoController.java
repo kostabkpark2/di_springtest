@@ -31,23 +31,12 @@ public class PostRestDtoController {
   @PatchMapping("/posts/{postId}")
   public PostDetailResponseDto updateBodyPost(@PathVariable int postId,
                            @RequestBody PostUpdateRequestDto postDto) {
-    Post post = new Post();
-    post.setPostId(postId);
-    post.setBody(postDto.getBody());
-    postService.updatePost(post);
-    return null;
-        //postId + "번째 게시판 글이 수정되었습니다.";
+    return postService.updatePost(postDto);
   }
 
   @PutMapping("/posts/{postId}")
   public int updateLikesPost(@PathVariable int postId){
-
-    Post post = new Post();
-    post.setPostId(postId);
-//    post.setBody(postDto.getBody());
-    postService.updatePost(post);
-    return 0;
-    //postId + "번째 게시판 글이 수정되었습니다.";
+    return postService.updateLikesPost(postId);
   }
 
   @DeleteMapping("/posts/{postId}")
@@ -58,8 +47,7 @@ public class PostRestDtoController {
 
   @GetMapping("/posts/{postId}")
   public PostDetailResponseDto viewPostDetail(@PathVariable int postId) {
-    return null;
-        //postService.selectPost(postId);
+    return postService.selectPost(postId);
   }
 
 }

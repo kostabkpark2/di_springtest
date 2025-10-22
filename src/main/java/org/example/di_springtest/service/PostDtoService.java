@@ -3,6 +3,7 @@ package org.example.di_springtest.service;
 import org.example.di_springtest.dto.PostAllResponseDto;
 import org.example.di_springtest.dto.PostCreateRequestDto;
 import org.example.di_springtest.dto.PostDetailResponseDto;
+import org.example.di_springtest.dto.PostUpdateRequestDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +37,31 @@ public class PostDtoService {
     return postDtoRet;
   }
 
-  public Post selectPost(int postId) {
-    return postRepository.findById(postId);
+  public PostDetailResponseDto selectPost(int postId) {
+    Post findPost = postRepository.findById(postId);
+    PostDetailResponseDto postDto = PostDetailResponseDto.of(findPost);
+    return postDto;
   }
 
-  public void updatePost(Post post) {
-    Post findPost = postRepository.findById(post.getPostId());
-    findPost.setBody(post.getBody());
+  public PostDetailResponseDto updatePost(PostUpdateRequestDto postDto) {
+    Post findPost = postRepository.findById(postDto.getPostId());
+    findPost.setBody(postDto.getBody());
     postRepository.updatePost(findPost);
+    Post updatedPost = postRepository.findById(postDto.getPostId());
+    PostDetailResponseDto postDtoRet = PostDetailResponseDto.of(updatedPost);
+    return postDtoRet;
   }
 
   public void deletePost(int postId) {
     postRepository.deletePost(postId);
+  }
+
+  public int updateLikesPost(int postId) {
+    Post findPost = postRepository.findById(postId);
+    int likes = findPost.getLikes();
+    findPost.setLikes(++likes);
+    System.out.println(findPost);
+    postRepository.updatePost(findPost);
+    return likes;
   }
 }
