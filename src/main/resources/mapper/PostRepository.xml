@@ -5,12 +5,12 @@
 <mapper namespace="org.example.di_springtest.repository.PostRepository">
     <select id="findAll"
         resultType="org.example.di_springtest.model.Post">
-        SELECT postId, title, body, likes FROM post
+        SELECT post_id, title, body, likes FROM post
     </select>
     <select id="findById"
         resultType="org.example.di_springtest.model.Post"
         parameterType="int">
-        select postId, title, body, likes FROM post where postId = #{postId}
+        select post_id, title, body, likes FROM post where post_id = #{postId}
     </select>
     <insert id="insertPost"></insert>
     <!--    public int insertPost(Post post);-->
