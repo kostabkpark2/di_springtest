@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class PostRepositoryImpl implements PostRepository {
   private final Map<Integer, Post> posts;
   private int sequence ;

@@ -3,4 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.di_springtest.repository.PostRepository">
+    <select id="findAll"
+        resultType="org.example.di_springtest.model.Post">
+        SELECT postId, title, body, likes FROM post
+    </select>
+    <select id="findById"
+        resultType="org.example.di_springtest.model.Post"
+        parameterType="int">
+        select postId, title, body, likes FROM post where postId = #{postId}
+    </select>
+    <insert id="insertPost"></insert>
+    <!--    public int insertPost(Post post);-->
+    <update id="updatePost"></update>
+    <delete id="deletePost"></delete>
+
+
+<!--    public Post findById(int postId);-->
+<!--    public void updatePost(Post post);-->
+<!--    public void deletePost(int postId);-->
+
+
+
+
+
+
 </mapper>
