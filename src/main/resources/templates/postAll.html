@@ -22,6 +22,12 @@
                    th:text="${post.title}">title</a>
             </td>
             <td th:text="${post.likes}">likes</td>
+            <td>
+                <button th:onclick="|location.href='@{/posts/delete/{postId}(postId=${post.postId})}'|"
+                        type="button">
+                    삭제
+                </button>
+            </td>
         </tr>
     </table>
 </body>

@@ -48,21 +48,26 @@ public class PostController {
   }
 
   @GetMapping("/update/{postId}")
-  @ResponseBody
+  public String updatePost(@PathVariable int postId,  Model model) {
+    Post post = postService.selectPost(postId);
+    model.addAttribute("post", post);
+    return "postUpdate";
+  }
+
+  @PostMapping("/update/{postId}")
   public String updatePost(@PathVariable int postId,
-                           @RequestParam String body) {
-    Post post = new Post();
-    post.setPostId(postId);
-    post.setBody(body);
-    postService.updatePost(post);
-    return postId + "번째 게시판 글이 수정되었습니다.";
+                           Post post) {
+    Post post1 = postService.selectPost(postId);
+    post1.setBody(post.getBody());
+    postService.updatePost(post1);
+    return "redirect:/posts/"+postId;
   }
 
   @GetMapping("/delete/{postId}")
-  @ResponseBody
+  //@ResponseBody
   public String deletePost(@PathVariable int postId) {
     postService.deletePost(postId);
-    return postId + "번째 게시판 글이 삭제되었습니다.";
+    return "redirect:/posts/list";
   }
 
   @GetMapping("/{postId}")
