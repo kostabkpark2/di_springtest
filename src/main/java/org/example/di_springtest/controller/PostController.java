@@ -36,14 +36,15 @@ public class PostController {
   }
 
   @GetMapping("/insert")
-  @ResponseBody
-  public String createPost(@RequestParam String title,
-                           @RequestParam String body) {
-    Post post = new Post();
-    post.setTitle(title);
-    post.setBody(body);
-    String msg = postService.createPost(post) + "번째 게시판 글이 등록되었습니다.";
-    return msg;
+  //@ResponseBody
+  public String createPost() {
+    return "postAdd";
+  }
+
+  @PostMapping("/insert")
+  public String createPost(Model model, Post post) {
+    postService.createPost(post);
+    return "redirect:/posts/list";
   }
 
   @GetMapping("/update/{postId}")
