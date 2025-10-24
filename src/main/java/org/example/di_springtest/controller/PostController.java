@@ -64,4 +64,11 @@ public class PostController {
     postService.deletePost(postId);
     return postId + "번째 게시판 글이 삭제되었습니다.";
   }
+
+  @GetMapping("/{postId}")
+  public String getPostById(@PathVariable int postId, Model model) {
+    Post post = postService.selectPost(postId);
+    model.addAttribute("post", post);
+    return "postDetail";
+  }
 }
