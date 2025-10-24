@@ -4,9 +4,12 @@ spring:
     url: jdbc:mysql://localhost:3306/snsproject?characterEncoding=utf8&serverTimezone=Asia/Seoul
     username: root
     password: 1111
+    hikari:
+      maximum-pool-size: 3
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: org.example.di_springtest.model
 
