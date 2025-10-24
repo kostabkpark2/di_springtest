@@ -1,5 +1,6 @@
 package org.example.di_springtest.controller;
 
+import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@Controller
-//@RequestMapping("/ditest")
+@Controller
+@RequestMapping("/posts")
 public class PostController {
   //@Autowired
   private final PostService postService;
@@ -23,6 +24,12 @@ public class PostController {
   @ResponseBody
   public List<Post> getAllPosts() {
     return postService.getAllPost();
+  }
+
+  @GetMapping("/dynamic")
+  @ResponseBody
+  public List<Post> getAllPostsDynamicCondition(@RequestBody PostRequiryDto postRequiry) {
+    return postService.selectAllPostsDynamicCondition(postRequiry);
   }
 
   @GetMapping("/insert")

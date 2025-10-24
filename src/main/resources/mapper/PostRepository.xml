@@ -12,19 +12,40 @@
         parameterType="int">
         select post_id, title, body, likes FROM post where post_id = #{postId}
     </select>
-    <insert id="insertPost"></insert>
-    <!--    public int insertPost(Post post);-->
-    <update id="updatePost"></update>
-    <delete id="deletePost"></delete>
+<!--    List<Post> findAllDynamic(PostRequiryDto postRequiry);-->
+    <select id="findAllDynamic"
+            resultType="Post"
+            parameterType="org.example.di_springtest.dto.PostRequiryDto">
+        SELECT post_id, title, body, likes FROM post
+        <where>
+            <if test="title != null and title != ''">
+                title like concat('%', #{title}, '%')
+            </if>
+            <if test="likes > 0">
+                and likes >= #{likes}
+            </if>
+        </where>
+    </select>
 
-
-<!--    public Post findById(int postId);-->
-<!--    public void updatePost(Post post);-->
-<!--    public void deletePost(int postId);-->
-
-
-
-
-
-
+    <insert id="insertPost"
+            parameterType="Post"
+            useGeneratedKeys="true"
+            keyProperty="postId">
+        insert into post(title, body, likes) values (#{title}, #{body}, #{likes})
+    </insert>
+    <update id="updatePost"
+            parameterType="Post">
+        update post
+        <set>
+            <if test="title != null or title != ''">title=#{title} , </if>
+            <if test="body != ''">body=#{body},</if>
+            <if test="likes >= 0">likes=#{likes} </if>
+        </set>
+        where post_id = #{postId}
+    </update>
+    <delete id="deletePost"
+            parameterType="int">
+        delete from post
+        where post_id = #{postId}
+    </delete>
 </mapper>

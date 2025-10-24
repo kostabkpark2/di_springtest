@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 public class PostDtoService {
   private final PostRepository postRepository;
 
@@ -31,9 +31,13 @@ public class PostDtoService {
     Post post = new Post();
     post.setTitle(postDto.getTitle());
     post.setBody(postDto.getBody());
-    int postId = postRepository.insertPost(post);
-    Post newPost = postRepository.findById(postId);
+//    System.out.println("before : " + post);
+    postRepository.insertPost(post);
+//    System.out.println("after : " + post);
+//    System.out.println(post.getPostId());
+    Post newPost = postRepository.findById(post.getPostId());
     PostDetailResponseDto postDtoRet = PostDetailResponseDto.of(newPost);
+//    System.out.println(postDtoRet);
     return postDtoRet;
   }
 

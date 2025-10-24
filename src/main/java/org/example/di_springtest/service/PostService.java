@@ -1,5 +1,6 @@
 package org.example.di_springtest.service;
 
+import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
+@Service
 public class PostService {
   private final PostRepository postRepository;
 
@@ -21,7 +22,8 @@ public class PostService {
   }
 
   public int createPost(Post post) {
-    return postRepository.insertPost(post);
+    postRepository.insertPost(post);
+    return post.getPostId(); // < == 나중에 수정할 것
   }
 
   public Post selectPost(int postId) {
@@ -36,5 +38,9 @@ public class PostService {
 
   public void deletePost(int postId) {
     postRepository.deletePost(postId);
+  }
+
+  public List<Post> selectAllPostsDynamicCondition(PostRequiryDto postRequiry) {
+    return postRepository.findAllDynamic(postRequiry);
   }
 }

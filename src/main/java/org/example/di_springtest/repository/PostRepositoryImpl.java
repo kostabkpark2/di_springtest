@@ -1,6 +1,7 @@
 package org.example.di_springtest.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.springframework.stereotype.Repository;
 
@@ -22,13 +23,13 @@ public class PostRepositoryImpl implements PostRepository {
   }
 
   @Override
-  public int insertPost(Post post) {
+  public void insertPost(Post post) {
     //System.out.println(post);
     // post.postId 가 전부 0 이 나온 이유 확인 및 수정
     post.setPostId(++sequence);
     posts.put(sequence, post);
     //System.out.println(post);
-    return sequence;
+//    return sequence;  <== 나중에 확인하기
   }
 
   @Override
@@ -44,5 +45,10 @@ public class PostRepositoryImpl implements PostRepository {
   @Override
   public void deletePost(int postId) {
     posts.remove(postId);
+  }
+
+  @Override
+  public List<Post> findAllDynamic(PostRequiryDto postRequiry) {
+    return List.of();
   }
 }
