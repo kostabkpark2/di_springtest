@@ -5,6 +5,7 @@ import org.example.di_springtest.model.Post;
 import org.example.di_springtest.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public class PostController {
   }
 
   @GetMapping("/list")
-  @ResponseBody
-  public List<Post> getAllPosts() {
-    return postService.getAllPost();
+  //@ResponseBody
+  public  String getAllPosts(Model model) {
+    //List<Post> postService.getAllPost();
+    model.addAttribute("allPosts", postService.getAllPost());
+    return "postAll";
   }
 
   @GetMapping("/dynamic")

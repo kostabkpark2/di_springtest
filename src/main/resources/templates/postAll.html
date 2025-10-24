@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>allPosts</title>
+</head>
+<body>
+    <h1>PostAll</h1>
+    <table>
+        <tr>
+            <th>postId</th>
+            <th>title</th>
+            <th>likes</th>
+        </tr>
+        <tr th:each="post : ${allPosts}">
+            <td th:text="${post.postId}">Id</td>
+            <td th:text="${post.title}">title</td>
+            <td th:text="${post.likes}">likes</td>
+        </tr>
+    </table>
+</body>
+</html>
