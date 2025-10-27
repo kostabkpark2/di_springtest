@@ -41,17 +41,20 @@ public class PostController {
   @GetMapping("/insert")
   //@ResponseBody
   public String createPost() {
+    // 로그인 여부 체크
     return "postAdd";
   }
 
   @PostMapping("/insert")
   public String createPost(Model model, Post post) {
+    // 로그인 여부 체크
     postService.createPost(post);
     return "redirect:/posts/list";
   }
 
   @GetMapping("/update/{postId}")
   public String updatePost(@PathVariable int postId,  Model model) {
+    // 로그인 여부 체크
     Post post = postService.selectPost(postId);
     model.addAttribute("post", post);
     return "postUpdate";
@@ -60,6 +63,7 @@ public class PostController {
   @PostMapping("/update/{postId}")
   public String updatePost(@PathVariable int postId,
                            Post post) {
+    // 로그인 여부 체크
     Post post1 = postService.selectPost(postId);
     post1.setBody(post.getBody());
     postService.updatePost(post1);
@@ -69,12 +73,14 @@ public class PostController {
   @GetMapping("/delete/{postId}")
   //@ResponseBody
   public String deletePost(@PathVariable int postId) {
+    // 로그인 여부 체크
     postService.deletePost(postId);
     return "redirect:/posts/list";
   }
 
   @GetMapping("/{postId}")
   public String getPostById(@PathVariable int postId, Model model) {
+    // 로그인 여부 체크
     Post post = postService.selectPost(postId);
     model.addAttribute("post", post);
     return "postDetail";

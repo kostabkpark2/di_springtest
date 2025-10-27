@@ -3,6 +3,7 @@ package org.example.di_springtest.service;
 import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.repository.PostRepository;
+import org.example.di_springtest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class PostService {
   private final PostRepository postRepository;
-
+  
   //@Autowired
   public PostService(PostRepository postRepository){
     this.postRepository = postRepository;

@@ -1,5 +1,6 @@
 package org.example.di_springtest.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.di_springtest.model.User;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -22,12 +24,18 @@ public class UserLoginController {
   }
 
   @PostMapping("/login")
-  public String userJoin(User user) {
+  public String userJoin(User user, HttpSession session) {
     User findUser = userService.getUserByUserId(user.getUserId());
     if(findUser != null && findUser.getPassword().equals(user.getPassword())) {
-      log.info(" 로그인시 입력한 암호 - {}, DB 에 들어있는 암호 - {}", user.getPassword(), findUser.getPassword());
+      session.setAttribute("user", findUser);
       return "redirect:/posts/list";
     }
+    return "redirect:/users/login";
+  }
+
+  @GetMapping("/logout")
+  public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+    session.invalidate();
     return "redirect:/users/login";
   }
 }

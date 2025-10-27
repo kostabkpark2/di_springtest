@@ -7,12 +7,14 @@
 <body>
     <h1>게시판 글 등록</h1>
     <hr>
+    <span th:text="${userId}"></span><button th:onclick="|location.href='@{/users/logout}'|">logout</button>
     <form action method="post">
         <label for="title">글 제목</label>
         <input type="text" id="title" name="title">
         <label for="body">게시판 글</label>
         <input type="text" id="body" name="body">
         <input type="submit" value="저장">
+        <input type="text" name="userId" disabled>
     </form>
 
 </body>
