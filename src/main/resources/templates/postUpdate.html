@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>update Post</title>
@@ -14,5 +14,9 @@
         <input type="text" th:field="*{body}">
         <input type="submit" value="저장">
     </form>
+    <button th:onclick="|location.href='@{/posts/{postId}(postId=${post.postId})}'|"
+            type="button">
+        이전
+    </button>
 </body>
 </html>
