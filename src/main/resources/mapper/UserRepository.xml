@@ -10,7 +10,7 @@
     <select id="findById"
         resultType="User"
         parameterType="String">
-        select user_id, user_name FROM user where user_id = #{userId}
+        select user_id, password, user_name FROM user where user_id = #{userId}
     </select>
     <insert id="insertUser"
             parameterType="User">
