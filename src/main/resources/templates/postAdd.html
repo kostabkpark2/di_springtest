@@ -7,7 +7,15 @@
 </head>
 <body>
     <h1>게시판 글 등록</h1>
+    <div sec:authorize-expr="isAuthenticated()">
+        <span sec:authentication="principal.userId"></span>
+        <button>로그아웃</button>
+    </div>
+    <div sec:authorize-expr="!isAuthenticated()">
+        <button>로그인</button>
+    </div>
     <hr>
+
     <span th:text="${userId}"></span><button th:onclick="|location.href='@{/users/logout}'|">logout</button>
     <form th:action method="post">
         <label for="title">글 제목</label>

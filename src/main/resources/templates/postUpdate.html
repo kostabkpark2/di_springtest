@@ -7,13 +7,22 @@
 </head>
 <body>
     <h1>게시판 글 수정</h1>
+    <div sec:authorize-expr="isAuthenticated()">
+        <span sec:authentication="principal.userId"></span>
+        <button>로그아웃</button>
+    </div>
+    <div sec:authorize-expr="!isAuthenticated()">
+        <button>로그인</button>
+    </div>
     <hr>
     <form th:action method="post" th:object="${post}">
         <label for="title">글 제목</label>
         <input type="text" th:field="*{title}" disabled>
         <label for="body">게시판 글</label>
         <input type="text" th:field="*{body}">
-        <input type="submit" value="저장">
+        <div th:if="${#authentication.principal.userId == post.user.userId}">
+            <input type="submit" value="저장">
+        </div>
     </form>
     <button th:onclick="|location.href='@{/posts/{postId}(postId=${post.postId})}'|"
             type="button">
