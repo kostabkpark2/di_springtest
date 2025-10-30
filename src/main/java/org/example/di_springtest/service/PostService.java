@@ -1,6 +1,7 @@
 package org.example.di_springtest.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.model.User;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostService {
   private final PostRepository postRepository;
   private final UserRepository userRepository;
@@ -25,10 +27,12 @@ public class PostService {
   public int createPost(Post post) {
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User findUser = userRepository.findById(user.getUserId());
+    log.info("로그인한 사용자 id : {}", findUser.getUserId());
     if(findUser == null) {
       return 0;       // < == 나중에 수정할 것
     }
     post.setUser(findUser);
+    log.info("게시판 글 등록한 사용자 id : {}", post.getUser().getUserId());
     postRepository.insertPost(post);
     return post.getPostId();
   }

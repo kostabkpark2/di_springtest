@@ -1,5 +1,6 @@
 package org.example.di_springtest.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.di_springtest.dto.PostRequiryDto;
 import org.example.di_springtest.model.Post;
 import org.example.di_springtest.service.PostService;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
+@Slf4j
 public class PostController {
   //@Autowired
   private final PostService postService;
@@ -46,8 +48,9 @@ public class PostController {
   }
 
   @PostMapping("/insert")
-  public String createPost(Model model, Post post) {
+  public String createPost(Post post) {
     // 로그인 여부 체크
+    log.info("createPost method called !!!");
     postService.createPost(post);
     return "redirect:/posts/list";
   }
