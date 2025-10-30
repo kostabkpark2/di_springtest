@@ -23,15 +23,15 @@ public class UserLoginController {
     return "userLogin";
   }
 
-  @PostMapping("/login")
-  public String userJoin(User user, HttpSession session) {
-    User findUser = userService.getUserByUserId(user.getUserId());
-    if(findUser != null && findUser.getPassword().equals(user.getPassword())) {
-      session.setAttribute("user", findUser);
-      return "redirect:/posts/list";
-    }
-    return "redirect:/users/login";
-  }
+//  @PostMapping("/login")
+//  public String userJoin(User user, HttpSession session) {
+//    User findUser = userService.getUserByUserId(user.getUserId());
+//    if(findUser != null && findUser.getPassword().equals(user.getPassword())) {
+//      session.setAttribute("user", findUser);
+//      return "redirect:/posts/list";
+//    }
+//    return "redirect:/users/login";
+//  }
 
   @GetMapping("/logout")
   public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
