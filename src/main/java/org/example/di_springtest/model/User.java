@@ -3,12 +3,14 @@ package org.example.di_springtest.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+//@Alias("User") // mybatis 에서 특정 객체만 type-alias-package 적용받게 하기 위해 설정
 @NoArgsConstructor
 @AllArgsConstructor
 @Data // getter,setter,toString, RequiredArgsContructor
