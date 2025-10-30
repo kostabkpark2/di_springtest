@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>allPosts</title>
@@ -7,6 +8,14 @@
 <body>
     <h1>PostAll</h1>
     <hr>
+    <div sec:authorize-expr="isAuthenticated()">
+        <span sec:authentication="principal.userId"></span>
+        <button>로그아웃</button>
+    </div>
+    <div sec:authorize-expr="!isAuthenticated()">
+        <button>로그인</button>
+    </div>
+
     <form id="searchForm" th:action="@{/posts/dynamic}">
         제목 <input type="text" name="title" th:value="${param.title}">
         좋아요 <input type="number" name="likes" min="0" value="0" th:value="${param.likes}">
@@ -29,10 +38,12 @@
             </td>
             <td th:text="${post.likes}">likes</td>
             <td>
-                <button th:onclick="|location.href='@{/posts/delete/{postId}(postId=${post.postId})}'|"
-                        type="button">
-                    삭제
-                </button>
+                <div th:if="${#authentication.principal.userId == post.user.userId}">
+                    <button th:onclick="|location.href='@{/posts/delete/{postId}(postId=${post.postId})}'|"
+                            type="button">
+                        삭제
+                    </button>
+                </div>
             </td>
         </tr>
     </table>
